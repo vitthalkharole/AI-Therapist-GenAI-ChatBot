@@ -14,3 +14,4 @@ SQLAlchemy==2.0.49
 PyMySQL==1.2.0
 
 langchain
+langchain-ollama
