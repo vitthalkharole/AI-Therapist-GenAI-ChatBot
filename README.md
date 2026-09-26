@@ -1,138 +1,53 @@
-🧠 AI-Therapist GenAI ChatBot
+# 🧠 AI-Therapist GenAI ChatBot
 
-An AI-powered mental health support application built with Python, FastAPI, LangGraph, LangChain, Qwen, and MedGemma. It provides conversational support, safety-aware workflows, emergency calling, and nearby therapist discovery.
+An AI-powered mental health support chatbot built with **Python, FastAPI, LangChain, LangGraph, Qwen, and MedGemma**.
 
-⚠️ This project is for educational/support purposes and is not a replacement for a licensed mental health professional or emergency service.
+> ⚠️ For educational/support purposes only. It is not a replacement for a licensed mental health professional or emergency service.
 
-✨ Features
+## 🚀 Live Demo
 
-💬 AI mental-health conversation
+👉 **[Try the AI-Therapist ChatBot](https://ai-therapist-genai-chatbot-2.onrender.com)**
 
-🛡️ Safety / risk-aware workflow
+## ✨ Features
 
-🤖 Two LLM options:
+* 💬 AI mental-health conversation
+* 🛡️ Safety/risk-aware workflow
+* 🤖 Qwen via Groq
+* 🧠 MedGemma via Ollama
+* 🔄 LangGraph workflow orchestration
+* 🧩 Function/tool calling
+* 📞 Emergency calling with Twilio/Exotel
+* 📍 Nearby therapist discovery
+* 🖥️ Streamlit frontend
+* ⚡ FastAPI backend
 
-Qwen via Groq — fast cloud inference
+## 🏗️ Architecture
 
-MedGemma via Ollama — local LLM inference
-
-🧩 Function/tool calling
-
-📞 Emergency contact calling via Twilio / Exotel
-
-📍 Nearby therapist discovery using a location/maps service
-
-🔄 LangGraph-based workflow orchestration
-
-🏗️ Architecture
-
+```text
 User
  ↓
-Frontend
+Streamlit
  ↓
 FastAPI
  ↓
 LangGraph
  ↓
-Safety / LLM Decision
+LLM / Tools
  ├── Qwen → Groq
  ├── MedGemma → Ollama
- ├── Calling Tool → Twilio / Exotel
- └── Location Tool → Maps / Location Service
+ ├── Calling → Twilio/Exotel
+ └── Location → Maps API
  ↓
-Response / Tool Result
- ↓
-User
+Response
+```
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-Category
+**Python • FastAPI • Streamlit • LangChain • LangGraph • Qwen • MedGemma • Groq • Ollama • Twilio • Exotel**
 
-Technologies
+## 📂 Project Structure
 
-Language
-
-Python
-
-Backend
-
-FastAPI, Uvicorn
-
-AI Workflow
-
-LangChain, LangGraph
-
-LLMs
-
-Qwen, MedGemma
-
-LLM Runtime/Providers
-
-Groq, Ollama
-
-Calling
-
-Twilio, Exotel
-
-Location
-
-Maps / Location API
-
-Frontend
-
-Streamlit / configured frontend
-
-Version Control
-
-Git, GitHub
-
-🧩 Function Calling
-
-The application can invoke backend tools when an action is required.
-
-User Request
-    ↓
-LangGraph
-    ↓
-LLM
-    ↓
-Function Call
- ┌──┴──────────────┐
- ↓                 ↓
-Calling          Location
- ↓                 ↓
-Twilio/Exotel    Maps API
-
-📞 Emergency Calling
-
-For configured high-risk workflows:
-
-User Message
- ↓
-Safety Workflow
- ↓
-Calling Function
- ↓
-Twilio / Exotel
- ↓
-Configured Emergency Contact
-
-Telephony features require valid provider credentials, verified numbers, and applicable compliance.
-
-📍 Therapist Location
-
-Users can request nearby professional support:
-
-"Find therapists near me"
-          ↓
-   Location Function
-          ↓
-    Maps / Location API
-          ↓
- Nearby Therapist Results
-
-📂 Project Structure
-
+```text
 AI-Therapist-GenAI-ChatBot/
 ├── backend/
 ├── frontend/
@@ -140,65 +55,44 @@ AI-Therapist-GenAI-ChatBot/
 ├── .env.example
 ├── .gitignore
 ├── LICENSE
-├── README.md
-└── requirements.txt
+└── README.md
+```
 
-⚙️ Setup
+## ⚙️ Run Locally
 
+```bash
 git clone https://github.com/vitthalkarole/AI-Therapist-GenAI-ChatBot.git
 cd AI-Therapist-GenAI-ChatBot
 
 python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate
 
 pip install -r requirements.txt
+```
 
-Create a .env file from .env.example and add only the credentials required by your configuration.
+### Backend
 
-Run Backend
-
+```bash
 uvicorn backend.main:app --reload
+```
 
-Run Streamlit Frontend
+### Frontend
 
-streamlit run frontend/app.py
+```bash
+streamlit run frontend/frontend.py
+```
 
-Update the entry-point paths above if your actual filenames are different.
+Create a `.env` file using `.env.example` and add the required API credentials.
 
-🔐 Security
+## 🔐 Security
 
-Keep API keys and credentials in .env
+* Never commit `.env` or API keys.
+* Store production secrets in environment variables.
+* Keep telephony and AI provider credentials on the backend.
 
-Never commit .env to GitHub
+## 👨‍💻 Author
 
-Use .env.example for required variable names
-
-📸 Screenshots
-
-Add application screenshots to the screenshots/ folder.
-
-🔮 Future Improvements
-
-Conversation memory
-
-Human therapist handoff
-
-Appointment booking
-
-Voice interaction
-
-Multilingual support
-
-Improved safety evaluation
-
-Production deployment
-
-👨‍💻 Author
-
-Vitthal Kharole
+**Vitthal Kharole**
 Computer Science Engineering Student
-
-GitHub
 
 ⭐ If you find the project useful, consider giving it a star.
