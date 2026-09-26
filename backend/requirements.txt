@@ -12,3 +12,8 @@ firebase-admin==7.1.0
 
 SQLAlchemy==2.0.49
 PyMySQL==1.2.0
+
+langchain
+langchain-openai
+langchain-ollama
+langchain-groq
