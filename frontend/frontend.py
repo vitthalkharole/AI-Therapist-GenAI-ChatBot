@@ -1,6 +1,10 @@
 
 import streamlit as st
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # -----------------------------
 # Page Configuration
@@ -11,7 +15,13 @@ st.set_page_config(
     layout="centered"
 )
 
-BACKEND_URL = "http://localhost:8000/ask"
+# Get FastAPI backend URL from environment variable
+BACKEND_URL = os.getenv("API_URL")
+
+# Optional: check whether URL is loaded
+if not BACKEND_URL:
+    st.error("API_URL environment variable is not configured.")
+    st.stop()
 
 
 # -----------------------------
@@ -112,15 +122,19 @@ if user_input:
 
             try:
 
+                # Call FastAPI backend
                 response = requests.post(
-                    BACKEND_URL,
-                    json={"message": user_input},
+                    f"{BACKEND_URL}/ask",
+                    json={
+                        "message": user_input
+                    },
                     timeout=60
                 )
 
                 if response.status_code == 200:
 
                     data = response.json()
+
                     ai_response = data.get(
                         "response",
                         "I'm unable to generate a response right now."
@@ -129,15 +143,14 @@ if user_input:
                 else:
 
                     ai_response = (
-                        "Sorry, I'm having trouble connecting "
-                        "to the AI service."
+                        f"Sorry, the backend returned "
+                        f"status code {response.status_code}."
                     )
 
             except requests.exceptions.ConnectionError:
 
                 ai_response = (
-                    "⚠️ Backend server is not running. "
-                    "Please start your FastAPI server."
+                    "⚠️ Unable to connect to the backend server."
                 )
 
             except requests.exceptions.Timeout:
@@ -197,4 +210,3 @@ with st.sidebar:
         "SafeSpace is an AI assistant and not a replacement "
         "for a qualified mental health professional."
     )
-
