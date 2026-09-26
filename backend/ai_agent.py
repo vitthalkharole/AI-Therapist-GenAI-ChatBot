@@ -97,13 +97,3 @@ def parse_response(stream):
     return tool_called_name, final_response
 
 
-if __name__ == "__main__":
-    while True:
-        user_input = input("User: ")
-        print(f"Received user input: {user_input[:200]}...")
-        inputs = {"messages": [("system", SYSTEM_PROMPT), ("user", user_input)]}
-        stream = graph.stream(inputs, stream_mode="updates")
-        tool_called_name, final_response = parse_response(stream)
-        print("TOOL CALLED: ", tool_called_name)
-        print("ANSWER: ", final_response)
-        
